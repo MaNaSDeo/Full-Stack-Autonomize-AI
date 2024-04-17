@@ -1,0 +1,8 @@
+{
+  "name": "full-stack-autonomize-ai",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/MaNaSDeo/Full-Stack-Autonomize-AI.git",
+  "author": "manasdeo <rmnslogin@gmail.com>",
+  "license": "MIT"
+}
