@@ -6,7 +6,7 @@ import express, {
   type NextFunction,
 } from "express";
 import cors from "cors";
-import mongoose from "mongoose";
+import connectDB from "./db/connect";
 
 dotenv.config();
 
@@ -32,16 +32,7 @@ app.get("/api/v1", (req, res) => {
 
 const start = async (): Promise<void> => {
   try {
-    mongoose
-      .connect(process.env.MONGO_URI!)
-      .then(() => {
-        console.log("Connected to the Database...");
-        return mongoose;
-      })
-      .catch((err) => {
-        console.log(err);
-        process.exit(1);
-      });
+    await connectDB(process.env.MONGO_URI!);
     app.listen(PORT, () =>
       console.log(`Server is listening on port ${PORT}...`)
     );
