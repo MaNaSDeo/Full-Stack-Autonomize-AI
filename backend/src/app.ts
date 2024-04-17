@@ -7,6 +7,7 @@ import express, {
 } from "express";
 import cors from "cors";
 import connectDB from "./db/connect";
+import userRoute from "./routes/user.routes";
 
 dotenv.config();
 
@@ -25,6 +26,8 @@ app.use((req: Request, res: Response, next) => {
   console.log(`Incoming request: ${req.method} ${req.path}`);
   next();
 });
+
+app.use("/api/v1/users", userRoute);
 
 app.get("/api/v1", (req, res) => {
   res.send("<h1>GitHub Explorer</h1>");
