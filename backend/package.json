@@ -1,11 +1,12 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "app.ts",
+  "main": "app.js",
   "license": "MIT",
   "scripts": {
-    "start": "node dist/app.js",
-    "dev": "ts-node-dev --respawn --pretty src/app.ts"
+    "start": "tsc && node dist/app.js",
+    "dev": "ts-node-dev --respawn --pretty src/app.ts",
+    "build": "tsc"
   },
   "dependencies": {
     "@types/express-validator": "^3.0.0",
