@@ -10,25 +10,48 @@ const GIT_URL = "https://api.github.com/users";
 
 const testController = async (req: Request, res: Response) => {
   const { username } = req.params;
+  const { location, blog, bio, ...otherFields } = req.body;
+
+  const userSchemaFields = Object.keys(User.schema.paths);
+
+  const unknownFields = Object.keys(otherFields).filter(
+    (field) => !userSchemaFields.includes(field)
+  );
+
+  if (unknownFields.length > 0) {
+    return res.status(400).json({
+      message: "Invalid fields in request body",
+      unknownFields,
+    });
+  } // Check if client have sent some unkown fields to update
+
+  if (req.body.hasOwnProperty("username") || req.body.hasOwnProperty("_id")) {
+    return res.status(400).json({ message: "Cannot update username or _id" });
+  } // Check if the request body contains username or _id
 
   try {
-    const deletedUser = await User.findOneAndUpdate(
+    const updatedUser = await User.findOneAndUpdate(
+      { username: new RegExp(`^${username}$`, "i") },
       {
-        username: new RegExp(`^${username}$`, "i"),
+        $set: {
+          location,
+          blog,
+          bio,
+          ...otherFields,
+        },
       },
-      { $set: { isDeleted: true } },
-      { new: true }
-    ); // Find the user and mark them as deleted (soft delete)
+      { new: true, runValidators: true }
+    );
 
-    if (!deletedUser) {
+    if (!updatedUser) {
       return res.status(404).json({ message: "User not found" });
     }
 
     res
       .status(200)
-      .json({ message: "User deleted successfully", user: deletedUser });
+      .json({ message: "User updated successfully", user: updatedUser });
   } catch (error) {
-    res.status(500).json({ message: "Error searching for users", error });
+    res.status(500).json({ message: "Error updating user", error });
   }
 };
 
@@ -160,10 +183,58 @@ const deleteUser = async (req: Request, res: Response) => {
   }
 };
 
+const updateUser = async (req: Request, res: Response) => {
+  const { username } = req.params;
+  const { location, blog, bio, ...otherFields } = req.body;
+
+  const userSchemaFields = Object.keys(User.schema.paths);
+
+  const unknownFields = Object.keys(otherFields).filter(
+    (field) => !userSchemaFields.includes(field)
+  );
+
+  if (unknownFields.length > 0) {
+    return res.status(400).json({
+      message: "Invalid fields in request body",
+      unknownFields,
+    });
+  } // Check if client have sent some unkown fields to update
+
+  if (req.body.hasOwnProperty("username") || req.body.hasOwnProperty("_id")) {
+    return res.status(400).json({ message: "Cannot update username or _id" });
+  } // Check if the request body contains username or _id
+
+  try {
+    const updatedUser = await User.findOneAndUpdate(
+      { username: new RegExp(`^${username}$`, "i") },
+      {
+        $set: {
+          location,
+          blog,
+          bio,
+          ...otherFields,
+        },
+      },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res
+      .status(200)
+      .json({ message: "User updated successfully", user: updatedUser });
+  } catch (error) {
+    res.status(500).json({ message: "Error updating user", error });
+  }
+};
+
 export {
   testController,
   saveUser,
   findMutualFollowers,
   searchUsers,
   deleteUser,
+  updateUser,
 };
