@@ -1,16 +1,14 @@
 import express from "express";
 import {
-  testController,
   saveUser,
   findMutualFollowers,
   searchUsers,
   deleteUser,
   updateUser,
+  listUsers,
 } from "../controllers/user.controller";
 
 const router = express.Router();
-
-router.patch("/test/:username", testController); // Test Controller
 
 router.get("/save-user/:username", saveUser); // GitHub User Data Storage
 
@@ -21,5 +19,7 @@ router.get("/search-users", searchUsers); // Search Functionality
 router.delete("/delete-user/:username", deleteUser); // Soft Delete User Records
 
 router.patch("/update-user/:username", updateUser); // Update User Details
+
+router.get("/list-users", listUsers); // List Users with Sorting
 
 export default router;

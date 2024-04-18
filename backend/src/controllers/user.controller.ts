@@ -1,59 +1,13 @@
 import { type Request, type Response } from "express";
 import axios from "axios";
 import User from "../models/Users.models";
+import { type SortOrder } from "mongoose";
 
 interface SearchQuery {
   [key: string]: RegExp | number | boolean | undefined;
 }
 
 const GIT_URL = "https://api.github.com/users";
-
-const testController = async (req: Request, res: Response) => {
-  const { username } = req.params;
-  const { location, blog, bio, ...otherFields } = req.body;
-
-  const userSchemaFields = Object.keys(User.schema.paths);
-
-  const unknownFields = Object.keys(otherFields).filter(
-    (field) => !userSchemaFields.includes(field)
-  );
-
-  if (unknownFields.length > 0) {
-    return res.status(400).json({
-      message: "Invalid fields in request body",
-      unknownFields,
-    });
-  } // Check if client have sent some unkown fields to update
-
-  if (req.body.hasOwnProperty("username") || req.body.hasOwnProperty("_id")) {
-    return res.status(400).json({ message: "Cannot update username or _id" });
-  } // Check if the request body contains username or _id
-
-  try {
-    const updatedUser = await User.findOneAndUpdate(
-      { username: new RegExp(`^${username}$`, "i") },
-      {
-        $set: {
-          location,
-          blog,
-          bio,
-          ...otherFields,
-        },
-      },
-      { new: true, runValidators: true }
-    );
-
-    if (!updatedUser) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    res
-      .status(200)
-      .json({ message: "User updated successfully", user: updatedUser });
-  } catch (error) {
-    res.status(500).json({ message: "Error updating user", error });
-  }
-};
 
 const saveUser = async (req: Request, res: Response) => {
   const { username } = req.params;
@@ -230,11 +184,33 @@ const updateUser = async (req: Request, res: Response) => {
   }
 };
 
+const listUsers = async (req: Request, res: Response) => {
+  try {
+    const { sortBy } = req.query;
+
+    let sortCriteria: { [key: string]: SortOrder | { $meta: any } } = {};
+
+    if (typeof sortBy === "string") {
+      // Example: sortBy=name or sortBy=followers
+      sortCriteria[sortBy] = 1;
+    } else {
+      sortCriteria["username"] = 1; // Default sorting criteria if sortBy parameter is not provided
+    }
+
+    const users = await User.find({ isDeleted: false }).sort(sortCriteria);
+
+    res.json(users);
+  } catch (error) {
+    console.error("Error listing users:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 export {
-  testController,
   saveUser,
   findMutualFollowers,
   searchUsers,
   deleteUser,
   updateUser,
+  listUsers,
 };
