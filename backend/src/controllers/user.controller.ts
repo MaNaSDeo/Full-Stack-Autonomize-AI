@@ -9,30 +9,24 @@ interface SearchQuery {
 const GIT_URL = "https://api.github.com/users";
 
 const testController = async (req: Request, res: Response) => {
-  const { ...queries } = req.query;
+  const { username } = req.params;
 
   try {
-    const searchQuery: SearchQuery = {};
+    const deletedUser = await User.findOneAndUpdate(
+      {
+        username: new RegExp(`^${username}$`, "i"),
+      },
+      { $set: { isDeleted: true } },
+      { new: true }
+    ); // Find the user and mark them as deleted (soft delete)
 
-    Object.keys(queries).forEach((param) => {
-      if (!isNaN(Number(queries[param]))) {
-        searchQuery[param] = Number(queries[param]);
-      } else if (typeof queries[param] === "boolean") {
-        searchQuery[param] = queries[param] === "true";
-      } else {
-        searchQuery[param] = new RegExp(queries[param] as string, "i");
-      }
-    });
-
-    const users = await User.find({ isDeleted: false, ...searchQuery });
-
-    if (users.length === 0) {
-      return res
-        .status(404)
-        .json({ message: "No users found matching the search criteria" });
+    if (!deletedUser) {
+      return res.status(404).json({ message: "User not found" });
     }
 
-    res.status(200).json({ message: "Users found!", users });
+    res
+      .status(200)
+      .json({ message: "User deleted successfully", user: deletedUser });
   } catch (error) {
     res.status(500).json({ message: "Error searching for users", error });
   }
@@ -142,4 +136,34 @@ const searchUsers = async (req: Request, res: Response) => {
   }
 };
 
-export { testController, saveUser, findMutualFollowers, searchUsers };
+const deleteUser = async (req: Request, res: Response) => {
+  const { username } = req.params;
+
+  try {
+    const deletedUser = await User.findOneAndUpdate(
+      {
+        username: new RegExp(`^${username}$`, "i"),
+      },
+      { $set: { isDeleted: true } },
+      { new: true }
+    ); // Find the user and mark them as deleted (soft delete)
+
+    if (!deletedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res
+      .status(200)
+      .json({ message: "User deleted successfully", user: deletedUser });
+  } catch (error) {
+    res.status(500).json({ message: "Error searching for users", error });
+  }
+};
+
+export {
+  testController,
+  saveUser,
+  findMutualFollowers,
+  searchUsers,
+  deleteUser,
+};
