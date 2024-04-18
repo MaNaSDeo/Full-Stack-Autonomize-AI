@@ -1,0 +1,164 @@
+openapi: 3.0.0
+info:
+  title: Github API
+  contact: {}
+  version: "1.0"
+servers:
+  - url: https://full-stack-autonomize-ai.onrender.com/api/v1
+    variables: {}
+paths:
+  /users/save-user/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The user ID
+    get:
+      tags:
+        - Git
+      summary: Save new user
+      operationId: Savenewuser
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+  /users/find-mutual-followers/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The user ID
+    get:
+      tags:
+        - Git
+      summary: Find mutual followers
+      operationId: Findmutualfollowers
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+  /users/search-users:
+    get:
+      tags:
+        - Git
+      summary: Search users
+      operationId: Searchusers
+      parameters:
+        - name: location
+          in: query
+          description: ""
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: string
+            example: Noida
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+  /users/delete-user/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The user ID
+    delete:
+      tags:
+        - Git
+      summary: Soft Delete user
+      operationId: SoftDeleteuser
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+  /users/update-user/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The user ID
+    patch:
+      tags:
+        - Git
+      summary: Update user
+      operationId: Updateuser
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/UpdateuserRequest"
+                - example:
+                    following: 98
+                    username23: manasdeo12
+            example:
+              following: 98
+              username23: manasdeo12
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+  /users/list-users:
+    get:
+      tags:
+        - Git
+      summary: Sort Users
+      operationId: SortUsers
+      parameters:
+        - name: sortBy
+          in: query
+          description: ""
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: string
+            example: followers
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+components:
+  schemas:
+    UpdateuserRequest:
+      title: UpdateuserRequest
+      required:
+        - following
+        - username23
+      type: object
+      properties:
+        following:
+          type: integer
+          format: int32
+        username23:
+          type: string
+tags:
+  - name: Git
+    description: ""

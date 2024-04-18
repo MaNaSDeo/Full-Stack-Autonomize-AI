@@ -8,6 +8,10 @@ import express, {
 import cors from "cors";
 import connectDB from "./db/connect";
 import userRoute from "./routes/user.routes";
+import swaggerUI from "swagger-ui-express";
+import YAML from "yamljs";
+
+const swaggerDocument = YAML.load("./swagger.yaml");
 
 dotenv.config();
 
@@ -22,16 +26,19 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction): void => {
   res.status(500).send("Something went wrong!");
 });
 
+/*
 app.use((req: Request, res: Response, next) => {
   console.log(`Incoming request: ${req.method} ${req.path}`);
   next();
 });
+*/
+
+app.get("/", (req, res) => {
+  res.send('<h1>GitHub Explorer</h1><a href="/api-docs">Documentation</a>');
+});
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 app.use("/api/v1/users", userRoute);
-
-app.get("/api/v1", (req, res) => {
-  res.send("<h1>GitHub Explorer</h1>");
-});
 
 const start = async (): Promise<void> => {
   try {
