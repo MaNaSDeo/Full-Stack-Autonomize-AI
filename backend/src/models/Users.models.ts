@@ -57,7 +57,7 @@ const userSchema = new mongoose.Schema({
   updated_at: {
     type: String,
   },
-  friends: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+  friends: [{ type: String }],
   isDeleted: {
     type: Boolean,
     default: false,
