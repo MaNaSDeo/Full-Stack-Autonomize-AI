@@ -1,7 +1,7 @@
 import { type Request, type Response } from "express";
 import axios from "axios";
 import User from "../models/Users.models";
-import { type SortOrder } from "mongoose";
+import mongoose, { type SortOrder } from "mongoose";
 
 interface SearchQuery {
   [key: string]: RegExp | number | boolean | undefined;
@@ -84,7 +84,7 @@ const findMutualFollowers = async (req: Request, res: Response) => {
 };
 
 const searchUsers = async (req: Request, res: Response) => {
-  const { ...queries } = req.query;
+  const { page, limit, isDeleted, ...queries } = req.query;
 
   try {
     const searchQuery: SearchQuery = {};
@@ -99,7 +99,19 @@ const searchUsers = async (req: Request, res: Response) => {
       }
     });
 
-    const users = await User.find({ isDeleted: false, ...searchQuery });
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 2;
+    const skip = (page - 1) * limit;
+
+    const totalUsers = await User.countDocuments({
+      isDeleted: false,
+      ...searchQuery,
+    });
+    const numOfPages = Math.ceil(totalUsers / limit);
+
+    let users = await User.find({ isDeleted: false, ...searchQuery })
+      .skip(skip)
+      .limit(limit);
 
     if (users.length === 0) {
       return res
@@ -107,7 +119,7 @@ const searchUsers = async (req: Request, res: Response) => {
         .json({ message: "No users found matching the search criteria" });
     }
 
-    res.status(200).json({ message: "Users found!", users });
+    res.status(200).json({ message: "Users found!", users, numOfPages });
   } catch (error) {
     res.status(500).json({ message: "Error searching for users", error });
   }
