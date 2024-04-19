@@ -63,3 +63,9 @@ h6 {
 #__next {
   isolation: isolate;
 }
+:root {
+  --main-blue-color: rgba(139, 124, 225, 1);
+  --main-white-color: rgba(255, 255, 255, 1);
+  --main-black-color: rgba(0, 0, 0, 1);
+  --main-gray-color: rgba(47, 48, 55, 0.3);
+}

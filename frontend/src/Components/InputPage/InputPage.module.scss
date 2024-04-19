@@ -21,11 +21,11 @@
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
-  color: rgba(47, 48, 55, 0.5);
+  color: var(--main-gray-color);
 }
 .inputBox::placeholder {
   text-align: center;
-  color: rgba(47, 48, 55, 0.5);
+  color: var(--main-gray-color);
 }
 .btnContainer {
   margin-top: 1rem;
@@ -35,8 +35,8 @@
   justify-content: space-around;
   align-items: center;
   .btnSearch {
-    background-color: rgba(139, 124, 225, 1);
-    color: rgba(255, 255, 255, 1);
+    background-color: var(--main-blue-color);
+    color: var(--main-white-color);
 
     padding: 6px 30px;
     gap: 8px;
@@ -47,22 +47,22 @@
     font-size: 18px;
     font-weight: 500;
     line-height: 27px;
-    text-align: left;
+    text-align: center;
     cursor: pointer;
   }
   .btnReset {
-    background-color: rgba(255, 255, 255, 1);
-    color: rgba(0, 0, 0, 1);
+    background-color: var(--main-white-color);
+    color: var(--main-black-color);
     padding: 6px 30px;
     gap: 8px;
     border-radius: 24px;
-    border: 1px solid rgba(47, 48, 55, 0.3);
+    border: 1px solid var(--main-gray-color);
 
     font-family: Poppins;
     font-size: 18px;
     font-weight: 500;
     line-height: 27px;
-    text-align: left;
+    text-align: center;
     cursor: pointer;
   }
 }
