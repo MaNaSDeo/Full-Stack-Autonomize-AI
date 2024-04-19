@@ -60,25 +60,31 @@ const userSchema = new mongoose.Schema({
   friends: [{ type: String }],
 
   repos: [
-    {
-      html_url: String,
-      description: String,
-      created_at: String,
-      updated_at: String,
-      visibility: String,
-      language: String,
-      default_branch: String,
-      size: Number,
-      id: Number,
-      name: String,
-    },
+    new mongoose.Schema(
+      {
+        html_url: String,
+        description: String,
+        created_at: String,
+        updated_at: String,
+        visibility: String,
+        language: String,
+        default_branch: String,
+        size: Number,
+        id: Number,
+        name: String,
+      },
+      { _id: false }
+    ),
   ],
   followersData: [
-    {
-      login: String,
-      id: Number,
-      avatar_url: String,
-    },
+    new mongoose.Schema(
+      {
+        username: String,
+        id: Number,
+        avatar_url: String,
+      },
+      { _id: false }
+    ),
   ],
   isDeleted: {
     type: Boolean,
