@@ -1,7 +1,7 @@
 import styles from "./App.module.scss";
 import InputPage from "./Components/InputPage";
 import Header from "./Components/Header";
-import RepoCard from "./Components/RepoCard";
+import RepoContainerPage from "./Components/RepoContainerPage";
 
 import { useSelector } from "react-redux";
 import { InputState } from "./store/types";
@@ -13,7 +13,7 @@ function App() {
       <Header />
       <h1>{inputText}</h1>
       <InputPage />
-      <RepoCard />
+      <RepoContainerPage />
     </div>
   );
 }

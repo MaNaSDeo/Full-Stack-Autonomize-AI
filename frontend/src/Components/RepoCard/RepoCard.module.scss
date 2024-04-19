@@ -5,6 +5,8 @@
   width: 24rem;
   height: auto;
   overflow: hidden;
+  cursor: pointer;
+  margin: 1rem;
 }
 .img {
   height: 4rem;
@@ -40,4 +42,9 @@
 .textDescription {
   text-wrap: wrap;
   color: rgb(121, 131, 140);
+
+  font-family: Poppins;
+  font-size: 1rem;
+  font-weight: normal;
+  text-align: left;
 }
