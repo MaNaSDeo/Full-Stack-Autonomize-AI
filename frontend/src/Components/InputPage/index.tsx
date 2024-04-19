@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setInputText } from "../../store/actions";
 
-import styles from "./InputBox.module.scss";
+import styles from "./InputPage.module.scss";
 
-function InputBox() {
+function InputPage() {
   const [inputValue, setInputValue] = useState<string>("");
   const dispatch = useDispatch();
 
@@ -14,9 +14,9 @@ function InputBox() {
 
   const handleSubmit = () => {
     dispatch(setInputText(inputValue));
-    // You can also reset the input value or perform any other actions here
     setInputValue("");
   };
+
   return (
     <div className={styles.main}>
       <input
@@ -26,9 +26,16 @@ function InputBox() {
         placeholder="Please provide the username!"
         className={styles.inputBox}
       />
-      <button onClick={handleSubmit}>Search</button>
+      <div className={styles.btnContainer}>
+        <button className={styles.btnReset} onClick={() => setInputValue("")}>
+          Reset
+        </button>
+        <button onClick={handleSubmit} className={styles.btnSearch}>
+          Search
+        </button>
+      </div>
     </div>
   );
 }
 
-export default InputBox;
+export default InputPage;
