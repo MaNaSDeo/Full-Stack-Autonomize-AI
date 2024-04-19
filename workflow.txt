@@ -1,0 +1,32 @@
+Frontend ->
+
+1. Build an input page
+2. Need to build a new a new controller for the repository list of github, can use this url {https://api.github.com/users/manasdeo/repos}
+it should look like an array with objects of repository details
+[
+    {
+        html_url: ...,
+        description: ...,
+        created_at: ...,
+        updated_at: ...,
+        visibility: ...,
+        language: ...,
+        default_branch: ..., 
+        size: ...,
+        id: ...,
+        name: ...,
+        avatar_url: ...,
+    },
+    ....
+]
+can go for pagination here, need to look if can handle it with backend or should handle this with frontend only.
+3. can show each repos in more details, once enter the repos.
+4. A new controller to add all the follwers in an array, {https://api.github.com/users/mralexgray/followers}
+[
+    {
+        login: ...,
+        id: ...,
+        avatar_url: ...,
+    }
+]
+5.
