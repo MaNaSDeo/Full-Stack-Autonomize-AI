@@ -1,12 +1,11 @@
 import styles from "./RepoContainerPage.module.scss";
 import RepoCard from "../RepoCard";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import Pagination from "../Pagination";
 import { useState } from "react";
 
 function RepoContainerPage() {
-  const dispatch = useDispatch();
   const { user } = useSelector((state: RootState) => state.user);
   const repos = (user && user.repos.length > 0 && user.repos) || [];
   const [currentPage, setCurrentPage] = useState<number>(1);
