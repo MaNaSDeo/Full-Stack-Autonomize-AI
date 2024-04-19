@@ -58,6 +58,28 @@ const userSchema = new mongoose.Schema({
     type: String,
   },
   friends: [{ type: String }],
+
+  repos: [
+    {
+      html_url: String,
+      description: String,
+      created_at: String,
+      updated_at: String,
+      visibility: String,
+      language: String,
+      default_branch: String,
+      size: Number,
+      id: Number,
+      name: String,
+    },
+  ],
+  followersData: [
+    {
+      login: String,
+      id: Number,
+      avatar_url: String,
+    },
+  ],
   isDeleted: {
     type: Boolean,
     default: false,

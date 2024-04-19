@@ -23,10 +23,38 @@ const saveUser = async (req: Request, res: Response) => {
         .json({ message: "User already exists", user: existingUser });
     }
 
-    const response = await axios.get(`${GIT_URL}/${username}`); //Fetch data from Github API
-    const userData = response.data;
+    const userResponse = await axios.get(`${GIT_URL}/${username}`); //Fetch data from Github API
+    const userData = userResponse.data;
 
-    const newUser = new User({ ...userData, username: userData.login }); // Create a new user document
+    const reposResponse = await axios.get(`${GIT_URL}/${username}/repos`); //Fetch repos details
+    const repoData = reposResponse.data.map((repo: any) => ({
+      html_url: repo.html_url,
+      description: repo.description,
+      created_at: repo.created_at,
+      updated_at: repo.updated_at,
+      visibility: repo.visibility,
+      language: repo.language,
+      default_branch: repo.default_branch,
+      size: repo.size,
+      id: repo.owner.id,
+      name: repo.name,
+    }));
+
+    const followersResponse = await axios.get(
+      `${GIT_URL}/${username}/followers`
+    ); //Fetch followers details
+    const followersData = followersResponse.data.map((follower: any) => ({
+      username: follower.login,
+      id: follower.id,
+      avatar_url: follower.avatar_url,
+    }));
+
+    const newUser = new User({
+      ...userData,
+      username: userData.login,
+      repos: repoData,
+      followersData,
+    }); // Create a new user document
 
     await newUser.save(); // Save the user document to the database
 
