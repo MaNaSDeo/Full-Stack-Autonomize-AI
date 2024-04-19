@@ -9,7 +9,7 @@ function App() {
     <div className={styles.app}>
       <Header />
       <InputPage />
-      {/* <RepoContainerPage /> */}
+      <RepoContainerPage />
       <RepoDetail />
     </div>
   );
