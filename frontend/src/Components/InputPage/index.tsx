@@ -16,8 +16,6 @@ function InputPage() {
     setInputValue(e.target.value);
   };
 
-  console.log("env: ", import.meta.env.VITE_APP_NODE_API_URI);
-
   const handleSubmit = async () => {
     if (inputValue) {
       try {

@@ -1,6 +1,14 @@
 .main {
   width: 67%;
   height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.repoCardContainer {
+  width: 100%;
+  height: 100%;
   //   display: flex;
   //   flex-wrap: wrap;
   //   justify-content: space-between;
