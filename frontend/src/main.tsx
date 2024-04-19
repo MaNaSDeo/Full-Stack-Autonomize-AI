@@ -3,12 +3,16 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 
-import store from "./store";
 import { Provider } from "react-redux";
+import store from "./store/store.ts";
+
+// import * as dotenv from "dotenv";
+// dotenv.config();
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <Provider store={store}>
-    <React.StrictMode>
+  <React.StrictMode>
+    <Provider store={store}>
       <App />
-    </React.StrictMode>
-  </Provider>
+    </Provider>
+  </React.StrictMode>
 );

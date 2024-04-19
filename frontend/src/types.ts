@@ -10,3 +10,31 @@ export interface iRepo {
   id: number;
   name: string;
 }
+
+export interface iFollowerData {
+  username: string;
+  id: number;
+  avatar_url: string;
+}
+
+export interface iUser {
+  username: string;
+  id: number;
+  avatar_url: string;
+  type: string;
+  name: string;
+  company: string;
+  blog: string;
+  location: string;
+  email: string;
+  bio: string;
+  public_repos: number;
+  followers: number;
+  following: number;
+  created_at: string;
+  updated_at: string;
+  friends: string[];
+  repos: iRepo[];
+  followersData: iFollowerData[];
+  isDeleted: boolean;
+}

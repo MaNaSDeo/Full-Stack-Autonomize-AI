@@ -1,7 +1,10 @@
 .main {
   width: 67%;
   height: auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  //   display: flex;
+  //   flex-wrap: wrap;
+  //   justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
 }
