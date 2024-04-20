@@ -2,7 +2,7 @@
   width: 100%;
   height: auto;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: flex-start;
 }
 .leftSide {
@@ -10,10 +10,100 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  width: 15%;
 }
+.img {
+  // margin: 0 auto;
+  padding-left: 3rem;
+  img {
+    width: 5rem;
+    height: 5rem;
+  }
+}
+.leftHeading {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 2rem 0 0.2rem 0;
+  img {
+    width: 1rem;
+    height: 1rem;
+  }
+  p {
+    padding-left: 0.3rem;
+    font-family: Inter;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+}
+.leftPText {
+  font-family: Inter;
+  font-size: 0.8rem;
+  font-weight: normal;
+  color: var(--main-gray-color);
+  span {
+    color: rgb(18, 97, 221);
+  }
+}
+.languageHeading {
+  font-family: Inter;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--main-gray-color);
+  margin-top: 1rem;
+}
+.languageText {
+  color: rgb(18, 97, 221);
+  padding: 2px 8px;
+  border: 1px solid var(--main-gray-color);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+.languageText:hover {
+  border: none;
+  background-color: rgb(240, 245, 255);
+}
+
 .rightSide {
+  margin-left: 3rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  width: 40%;
+}
+.application {
+  font-family: Inter;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--main-gray-color);
+}
+.rightHeading {
+  font-family: Inter;
+  font-size: 2rem;
+  font-weight: 500;
+}
+.aTag {
+  margin: 1rem 0;
+  background-color: rgb(0, 195, 65);
+  border: none;
+  border-radius: 4px;
+  padding: 0.3rem 1.5rem;
+  cursor: pointer;
+  a {
+    color: var(--main-white-color);
+    text-decoration: none;
+    font-family: Inter;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+}
+.description {
+  font-family: Inter;
+  font-size: 0.8rem;
+  font-weight: 500;
+  p {
+    margin: 0.5rem 0;
+  }
 }

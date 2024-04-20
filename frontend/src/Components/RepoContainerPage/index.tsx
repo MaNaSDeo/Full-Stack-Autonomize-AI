@@ -26,11 +26,13 @@ function RepoContainerPage() {
           <RepoCard repo={item} />
         ))}
       </div>
-      <Pagination
-        totalPage={totalPage}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      />
+      {repos.length && (
+        <Pagination
+          totalPage={totalPage}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
+      )}
     </div>
   );
 }

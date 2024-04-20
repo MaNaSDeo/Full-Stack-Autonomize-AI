@@ -14,6 +14,20 @@ function RepoDetail() {
     id: 102231033,
     name: "Blog-fullstack",
   };
+  const created_at = new Date(testData.created_at);
+  const formattedCreated_at = created_at.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+  const updated_at = new Date(testData.created_at);
+  const formattedUpdated_at = updated_at.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
   return (
     <div className={styles.main}>
       <div className={styles.leftSide}>
@@ -21,7 +35,10 @@ function RepoDetail() {
           <img src="/github-mark.svg" alt="git repo logo" />
         </div>
         <div className={styles.leftText}>
-          <p className={styles.leftHeading}>Verified by GitHub</p>
+          <div className={styles.leftHeading}>
+            <img src="/check-circle.svg" alt="Check icon" />
+            <p> Verified by GitHub</p>
+          </div>
           <p className={styles.leftPText}>
             GitHub confirms that this app meets the{" "}
             <span className={styles.leftSpanText}>
@@ -29,12 +46,13 @@ function RepoDetail() {
             </span>
           </p>
         </div>
-        <div className={styles.language}>
+        <div>
           <p className={styles.languageHeading}>Language</p>
           <p className={styles.languageText}>{testData.language}</p>
         </div>
       </div>
       <div className={styles.rightSide}>
+        <div className={styles.application}>Application</div>
         <div className={styles.rightHeading}>{testData.name}</div>
         <div className={styles.aTag}>
           <a href={testData.html_url} target="_blank">
@@ -42,7 +60,18 @@ function RepoDetail() {
           </a>
         </div>
         <div className={styles.description}>
+          <p>
+            <span>{testData.name}</span> is a repo in GitHub.
+          </p>
           <p>{testData.description || "No description available!"}</p>
+          <p>
+            The Repo was created on {formattedCreated_at} and was last updated
+            on {formattedUpdated_at}.
+          </p>
+          <p>
+            The default branch is {testData.default_branch} with visibility is{" "}
+            {testData.visibility}
+          </p>
         </div>
       </div>
     </div>
