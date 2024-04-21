@@ -3,7 +3,10 @@ import { type iRepo } from "../../types";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { type RootState } from "../../store/store";
-import { updatecurrentRepoName } from "../../store/userSlice";
+import {
+  updatecurrentRepoName,
+  updatecurrentRepoDetails,
+} from "../../store/userSlice";
 
 interface RepoCardProps {
   repo: iRepo;
@@ -18,6 +21,7 @@ function RepoCard({ repo }: RepoCardProps) {
 
   const handleRepoClick = () => {
     dispatch(updatecurrentRepoName(repo.name));
+    dispatch(updatecurrentRepoDetails(repo));
   };
 
   return (
