@@ -5,7 +5,7 @@
   justify-content: space-around;
   align-items: center;
 
-  margin-top: 2rem;
+  margin: 3.5rem auto;
 }
 .btn {
   background-color: var(--main-blue-color);
@@ -22,6 +22,11 @@
   line-height: 27px;
   text-align: center;
   cursor: pointer;
+}
+.disableBtn {
+  background-color: rgba(47, 48, 55, 0.5);
+  color: var(--main-white-color);
+  pointer-events: none;
 }
 .currentPage {
   background-color: var(--main-blue-color);

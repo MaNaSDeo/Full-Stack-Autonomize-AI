@@ -10,7 +10,11 @@ function Pagination({ totalPage, currentPage, setCurrentPage }: iPagination) {
   return (
     <div className={styles.main}>
       <div
-        className={styles.btn}
+        className={
+          currentPage === 1
+            ? `${styles.btn} ${styles.disableBtn}`
+            : `${styles.btn}`
+        }
         onClick={() => {
           setCurrentPage(1);
         }}
@@ -18,7 +22,11 @@ function Pagination({ totalPage, currentPage, setCurrentPage }: iPagination) {
         First
       </div>
       <div
-        className={styles.btn}
+        className={
+          currentPage === 1
+            ? `${styles.btn} ${styles.disableBtn}`
+            : `${styles.btn}`
+        }
         onClick={() => {
           if (currentPage > 1) {
             setCurrentPage(currentPage - 1);
@@ -29,7 +37,11 @@ function Pagination({ totalPage, currentPage, setCurrentPage }: iPagination) {
       </div>
       <div className={styles.currentPage}>{currentPage}</div>
       <div
-        className={styles.btn}
+        className={
+          currentPage === totalPage
+            ? `${styles.btn} ${styles.disableBtn}`
+            : `${styles.btn}`
+        }
         onClick={() => {
           if (currentPage < totalPage) {
             setCurrentPage(currentPage + 1);
@@ -39,7 +51,11 @@ function Pagination({ totalPage, currentPage, setCurrentPage }: iPagination) {
         Next
       </div>
       <div
-        className={styles.btn}
+        className={
+          currentPage === totalPage
+            ? `${styles.btn} ${styles.disableBtn}`
+            : `${styles.btn}`
+        }
         onClick={() => {
           setCurrentPage(totalPage);
         }}

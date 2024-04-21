@@ -1,16 +1,21 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { updateCurrentUserDetails } from "../../store/userSlice";
 import axios from "axios";
 
 import styles from "./InputPage.module.scss";
+import { useNavigate } from "react-router-dom";
 
 function InputPage() {
   const [inputValue, setInputValue] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [errorData, setErrorData] = useState<boolean>(false);
 
   const dispatch = useDispatch();
   const { user } = useSelector((state: RootState) => state.user);
+  const id = user?.username;
+  const navigate = useNavigate();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -19,25 +24,30 @@ function InputPage() {
   const handleSubmit = async () => {
     if (inputValue) {
       try {
+        setLoading(true);
         const response = await axios.get(
           `${import.meta.env.VITE_APP_NODE_API_URI}/save-user/${inputValue}`
         );
         console.log("response: ", response);
         if (response.status === 200) {
           dispatch(updateCurrentUserDetails(response.data.user));
+          if (response.data.user.username) {
+            navigate(`/user/${id}`);
+          }
         }
+        setLoading(false);
       } catch (error) {
         console.error(error);
+        setLoading(false);
+        setErrorData(true);
+
+        setTimeout(() => {
+          setErrorData(false);
+        }, 4000);
       }
     }
     setInputValue("");
   };
-
-  useEffect(() => {
-    if (user) {
-      console.log("user: ", user);
-    }
-  });
 
   return (
     <div className={styles.main}>
@@ -52,10 +62,18 @@ function InputPage() {
         <button className={styles.btnReset} onClick={() => setInputValue("")}>
           Reset
         </button>
-        <button onClick={handleSubmit} className={styles.btnSearch}>
-          Search
+        <button
+          onClick={handleSubmit}
+          className={loading ? styles.loadingBtn : styles.btnSearch}
+        >
+          {loading ? "Loading..." : "Search"}
         </button>
       </div>
+      {errorData && (
+        <div className={styles.errorMsg}>
+          There's no one named <span>{inputValue}</span> on GitHub
+        </div>
+      )}
     </div>
   );
 }

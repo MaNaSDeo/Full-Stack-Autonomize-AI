@@ -6,6 +6,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  margin-top: 7.5rem;
 }
 .inputBox {
   width: 24rem;
@@ -21,14 +22,14 @@
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
-  color: var(--main-gray-color);
+  color: var(--main-black-color);
 }
 .inputBox::placeholder {
   text-align: center;
   color: var(--main-gray-color);
 }
 .btnContainer {
-  margin-top: 1rem;
+  margin-top: 2rem;
   width: 20rem;
   height: auto;
   display: flex;
@@ -50,6 +51,22 @@
     text-align: center;
     cursor: pointer;
   }
+  .loadingBtn {
+    background-color: rgba(47, 48, 55, 0.5);
+    color: var(--main-white-color);
+
+    padding: 6px 30px;
+    gap: 8px;
+    border-radius: 24px;
+    border: none;
+
+    font-family: Poppins;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 27px;
+    text-align: center;
+    pointer-events: none;
+  }
   .btnReset {
     background-color: var(--main-white-color);
     color: var(--main-black-color);
@@ -64,5 +81,23 @@
     line-height: 27px;
     text-align: center;
     cursor: pointer;
+  }
+}
+.errorMsg {
+  margin-top: 1.5rem;
+  padding: 8px 20px;
+  gap: 10px;
+  border-radius: 8px;
+  background-color: rgba(255, 242, 242, 1);
+  border: 1px solid rgba(201, 13, 13, 1);
+
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  color: rgba(0, 0, 0, 1);
+  span {
+    color: rgba(33, 122, 218, 1);
   }
 }
