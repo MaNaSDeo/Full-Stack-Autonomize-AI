@@ -3,6 +3,7 @@ import InputPage from "./Components/InputPage";
 import Header from "./Components/Header";
 import RepoContainerPage from "./Components/RepoContainerPage";
 import RepoDetail from "./Components/RepoDetail";
+import FollowerContainerPage from "./Components/FollowerContainerPage";
 
 import { type FC } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -23,6 +24,10 @@ const App: FC = () => {
           <Route
             path={`/user/${id}/:${currentRepo}`}
             element={<RepoDetail />}
+          />
+          <Route
+            path={`/user/:${id}/followers`}
+            element={<FollowerContainerPage />}
           />
         </Routes>
       </div>

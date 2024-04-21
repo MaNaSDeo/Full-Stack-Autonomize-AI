@@ -29,6 +29,7 @@ function InputPage() {
         if (response.status === 200) {
           dispatch(updateCurrentUserDetails(response.data.user));
           const updatedUser = response.data.user;
+          console.log("updatedUser: ", updatedUser);
           if (updatedUser && updatedUser.username) {
             navigate(`/user/${updatedUser.username}`);
           }

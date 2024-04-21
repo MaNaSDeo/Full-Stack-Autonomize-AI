@@ -1,0 +1,44 @@
+.main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: auto;
+  height: auto;
+  overflow: hidden;
+  cursor: pointer;
+
+  border: 1px solid rgb(121, 131, 140);
+  padding: 10px 14px;
+  border-radius: 12px;
+  //   max-width: 25%;
+  flex-wrap: wrap;
+}
+.main:hover {
+  background-color: rgb(206 207 217 / 80%);
+}
+.img {
+  height: 4rem;
+  width: 4rem;
+  overflow: hidden;
+  border: none;
+  border-radius: 2rem;
+  margin-right: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  img {
+    width: 105%;
+    height: 105%;
+  }
+}
+.textHeading {
+  color: rgb(0, 85, 220);
+
+  font-family: Poppins;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 27px;
+  text-align: left;
+  word-break: break-word;
+}

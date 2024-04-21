@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import Pagination from "../Pagination";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function RepoContainerPage() {
   const { user } = useSelector((state: RootState) => state.user);
@@ -17,8 +18,6 @@ function RepoContainerPage() {
 
   const reposForPage = repos.slice(startIndex, endIndex);
 
-  console.log(repos.length);
-
   return (
     <div className={styles.main}>
       <div className={styles.repoCardContainer}>
@@ -26,14 +25,16 @@ function RepoContainerPage() {
           <RepoCard repo={item} />
         ))}
       </div>
-      {repos.length && (
+      {repos.length > 1 && (
         <Pagination
           totalPage={totalPage}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
         />
       )}
-      <button className={styles.followersBtn}>Check Followers</button>
+      <Link to={`/user/:${user?.username}/followers`}>
+        <button className={styles.followersBtn}>Check Followers</button>
+      </Link>
     </div>
   );
 }
