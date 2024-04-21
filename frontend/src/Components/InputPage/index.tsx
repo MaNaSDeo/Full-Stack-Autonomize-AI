@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store/store";
+import { useDispatch } from "react-redux";
 import { updateCurrentUserDetails } from "../../store/userSlice";
 import axios from "axios";
 
@@ -13,8 +12,6 @@ function InputPage() {
   const [errorData, setErrorData] = useState<boolean>(false);
 
   const dispatch = useDispatch();
-  const { user } = useSelector((state: RootState) => state.user);
-  const id = user?.username;
   const navigate = useNavigate();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,8 +28,9 @@ function InputPage() {
         console.log("response: ", response);
         if (response.status === 200) {
           dispatch(updateCurrentUserDetails(response.data.user));
-          if (response.data.user.username) {
-            navigate(`/user/${id}`);
+          const updatedUser = response.data.user;
+          if (updatedUser && updatedUser.username) {
+            navigate(`/user/${updatedUser.username}`);
           }
         }
         setLoading(false);

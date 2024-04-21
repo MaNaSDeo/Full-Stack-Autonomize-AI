@@ -3,10 +3,12 @@ import { type iUser } from "../types";
 
 interface UserState {
   user: iUser | null;
+  currentRepo: string;
 }
 
 const initialState: UserState = {
   user: null,
+  currentRepo: "",
 };
 
 export const userSlice = createSlice({
@@ -16,7 +18,11 @@ export const userSlice = createSlice({
     updateCurrentUserDetails: (state, action: PayloadAction<iUser>) => {
       state.user = action.payload;
     },
+    updatecurrentRepoName: (state, action: PayloadAction<string>) => {
+      state.currentRepo = action.payload;
+    },
   },
 });
 
-export const { updateCurrentUserDetails } = userSlice.actions;
+export const { updateCurrentUserDetails, updatecurrentRepoName } =
+  userSlice.actions;

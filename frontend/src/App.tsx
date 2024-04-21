@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { type RootState } from "./store/store";
 
 const App: FC = () => {
-  const { user } = useSelector((state: RootState) => state.user);
+  const { user, currentRepo } = useSelector((state: RootState) => state.user);
   const id = user?.username;
 
   return (
@@ -20,7 +20,10 @@ const App: FC = () => {
         <Routes>
           <Route path="/" element={<InputPage />} />
           <Route path={`/user/${id}`} element={<RepoContainerPage />} />
-          <Route path="/gitHub/detail" element={<RepoDetail />} />
+          <Route
+            path={`/user/${id}/:${currentRepo}`}
+            element={<RepoDetail />}
+          />
         </Routes>
       </div>
     </Router>
