@@ -33,6 +33,7 @@ function RepoContainerPage() {
           setCurrentPage={setCurrentPage}
         />
       )}
+      <button className={styles.followersBtn}>Check Followers</button>
     </div>
   );
 }

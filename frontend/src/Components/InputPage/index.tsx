@@ -34,6 +34,7 @@ function InputPage() {
           }
         }
         setLoading(false);
+        setInputValue("");
       } catch (error) {
         console.error(error);
         setLoading(false);
@@ -41,10 +42,10 @@ function InputPage() {
 
         setTimeout(() => {
           setErrorData(false);
+          setInputValue("");
         }, 4000);
       }
     }
-    setInputValue("");
   };
 
   return (

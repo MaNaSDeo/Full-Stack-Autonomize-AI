@@ -5,6 +5,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  position: relative;
 }
 .repoCardContainer {
   width: 85%;
@@ -13,4 +14,26 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
+}
+.followersBtn {
+  background-color: var(--main-blue-color);
+  color: var(--main-white-color);
+
+  padding: 6px 30px;
+  gap: 8px;
+  border-radius: 12px;
+  border: none;
+
+  font-family: Poppins;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 27px;
+  text-align: center;
+  cursor: pointer;
+
+  position: absolute;
+  right: -160px;
+  top: 25%;
+  transform: translateY(-50%) rotate(90deg);
+  transform-origin: top left;
 }
